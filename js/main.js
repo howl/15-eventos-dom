@@ -10,7 +10,9 @@ const generarTagsDesdeElementos = (elementos) => {
     elijo usar el objeto Set propio de javascript. Es mucho más rapido haciendo lo suyo.
   */
   const tags = new Set();
+
   elementos.forEach((elemento) => elemento.tags.forEach((tag) => tags.add(tag)));
+
   return Array.from(tags).sort();
 };
 
