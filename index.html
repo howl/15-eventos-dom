@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Práctica filtro</title>
+</head>
+
+<body>
+  <header>
+    <p>Práctica filtro</p>
+  </header>
+  <main class="cajaTransparente">
+    <h1>Fotos</h1>
+    <section>
+      <ul id="etiquetasFiltrado" class="flexContainer">
+        <!-- Aquí los tags del filtrado -->
+      </ul>
+      <p class="flexItemSolitario">
+        Se han encontrado <span id="numImagesFiltradas" class="negrita"></span> imágenes con el tag <span
+          id="etiquetaFiltrada" class="negrita"></span>
+      </p>
+    </section>
+    <section id="galeriaFotos" class="flexContainer">
+      <!-- Aquí la imagen principal con order -1 y con flex: 1 0 100% (esto en una clase como .flexItemPrincipio .flexItemSolitario) -->
+
+      <!-- Parte de los elementos del flex con order 0 (sin definir) pero flex: 1 0 100% en clase .flexItemSolitario -->
+      <h3 class="flexItemSolitario">Imágenes relacionadas</h3>
+
+      <!-- Aquí las imágenes relacionadas o texto de que no hay con order 1 (esto en una clase como .flexItemFinal)  -->
+    </section>
+  </main>
+  <footer class="cajaTransparente">
+    <p>&copy; 2026 David Santamaría Rogado. Todos los derechos reservados.<br>
+      Fondo diseñado por Creative_hat.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
