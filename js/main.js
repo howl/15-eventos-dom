@@ -36,3 +36,19 @@ const imagenes = [
     tags: ['histórico', 'sol', 'calor'],
   },
 ];
+
+/**
+ * Genera un array con los tags únicos presentes en una serie de elementos con tags.
+ * @param {[]} elementos - Array de elementos de los que leer sus tags.
+ * @returns {[]} - El array con los tags únicos.
+ */
+const generarTagsDesdeElementos = (elementos) => {
+  /*
+    De las múltiples formas que se pueden hacer para obtener los elementos únicos,
+    Ej: iterar cada array comprobando con includes en el array de destino si ya existe,
+    elijo usar el objeto Set propio de javascript. Es mucho más rapido haciendo lo suyo.
+  */
+  const tags = new Set();
+  elementos.forEach((elemento) => elemento.tags.forEach((tag) => tags.add(tag)));
+  return tags;
+};
