@@ -68,3 +68,22 @@ const generarBotonesDesdeTags = (tags) => {
 
   return fragmento;
 };
+
+/**
+ * Función de ejecución principal.
+ */
+(() => {
+  const botonesFiltrado = document.querySelector('#botonesFiltrado');
+
+  document.addEventListener('click', ev => {
+    /*
+      Discrimino los botones por el id del padre, es necesario probar primero
+      si existe padre ya que si se hace click sobre el elemento HTML,
+      parentElement es null.
+    */
+    if (ev.target.parentElement && ev.target.parentElement.id === 'botonesFiltrado')
+      console.log(ev.target.textContent);
+  });
+
+  botonesFiltrado.appendChild(generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes)));
+})();
