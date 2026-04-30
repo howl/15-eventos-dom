@@ -52,3 +52,19 @@ const generarTagsDesdeElementos = (elementos) => {
   elementos.forEach((elemento) => elemento.tags.forEach((tag) => tags.add(tag)));
   return tags;
 };
+
+/**
+ * Genera los botones de filtrado en base a las etiquetas que se le pasan.
+ * @param {[]} tags
+ * @returns {DocumentFragment}
+ */
+const generarBotonesDesdeTags = (tags) => {
+  const fragmento = document.createDocumentFragment();
+
+  tags.forEach((tag) => {
+    const nuevoButton = fragmento.appendChild(document.createElement('button'));
+    nuevoButton.textContent = tag;
+  });
+
+  return fragmento;
+};
