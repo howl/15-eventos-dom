@@ -82,8 +82,10 @@ const generarBotonesDesdeTags = (tags) => {
       si existe padre ya que si se hace click sobre el elemento HTML,
       parentElement es null.
     */
-    if (ev.target.parentElement && ev.target.parentElement.id === 'botonesFiltrado')
-      console.log(ev.target.textContent);
+    if (ev.target.parentElement && ev.target.parentElement.id === 'botonesFiltrado') {
+      const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
+      etiquetaFiltrada.textContent = ev.target.textContent;
+    }
   });
 
   botonesFiltrado.appendChild(generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes)));
