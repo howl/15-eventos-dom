@@ -40,7 +40,7 @@ const imagenes = [
 /**
  * Genera un array con los tags únicos presentes en una serie de elementos con tags.
  * @param {[]} elementos - Array de elementos de los que leer sus tags.
- * @returns {[]} - El array con los tags únicos.
+ * @returns {Set} - El Set con los tags únicos.
  */
 const generarTagsDesdeElementos = (elementos) => {
   /*
@@ -55,7 +55,7 @@ const generarTagsDesdeElementos = (elementos) => {
 
 /**
  * Genera los botones de filtrado en base a las etiquetas que se le pasan.
- * @param {[]} tags
+ * @param {Set} tags - Un Set con los tags para los que hacer botones.
  * @returns {DocumentFragment}
  */
 const generarBotonesDesdeTags = (tags) => {
