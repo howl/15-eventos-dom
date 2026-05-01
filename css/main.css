@@ -50,7 +50,8 @@ img {
 #botonesFiltrado>button:active,
 #botonesFiltrado>button.pulsado {
   background: linear-gradient(rgba(80, 80, 80, 0.1), rgba(255, 255, 255, 0.2));
-  color: lightgrey;
+  text-shadow: 0 0 2px black,
+    -1px -1px 6px black;
 }
 
 .displayNone {
