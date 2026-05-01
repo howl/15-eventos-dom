@@ -19,9 +19,9 @@ const generarTagsDesdeElementos = (elementos) => {
 /**
  * Genera los botones de filtrado en base a las etiquetas que se le pasan.
  * @param {[]} tags - Un Set con los tags para los que hacer botones.
- * @returns {DocumentFragment}
+ * @param {Element} elementoPadre - Elemento al que colocar las botones.
  */
-const generarBotonesDesdeTags = (tags) => {
+const generarBotonesDesdeTags = (tags, elementoPadre) => {
   const fragmento = document.createDocumentFragment();
 
   tags.forEach((tag) => {
@@ -29,7 +29,7 @@ const generarBotonesDesdeTags = (tags) => {
     nuevoButton.textContent = tag;
   });
 
-  return fragmento;
+  elementoPadre.appendChild(fragmento);
 };
 
 /**
@@ -133,5 +133,5 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     }
   });
 
-  botonesFiltrado.appendChild(generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes)));
+  generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes), botonesFiltrado);
 })();
