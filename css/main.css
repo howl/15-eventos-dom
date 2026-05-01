@@ -48,6 +48,10 @@ img {
   color: lightgrey;
 }
 
+.displayNone {
+  display: none;
+}
+
 .negrita {
   font-weight: 700;
 }

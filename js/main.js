@@ -124,14 +124,20 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
 
   document.addEventListener('click', ev => {
     if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
-      const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
-      const pluralSingular = document.querySelectorAll('.pluralSingular');
-      const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
-      const galeriaFotos = document.querySelector('#galeriaFotos');
-      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos)
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
+      const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
+      const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
+      const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
+      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, document.querySelector('#galeriaFotos'))
 
-      if (botonPulsadoAnterior)
+      if (!botonPulsadoAnterior) {
+        const infoDeUso = document.querySelector('#infoDeUso');
+        const infoDeFiltrado = document.querySelector('#infoDeFiltrado');
+
+        infoDeUso.classList.toggle('displayNone');
+        infoDeFiltrado.classList.toggle('displayNone');
+      }
+      else
         botonPulsadoAnterior.classList.remove('pulsado');
       ev.target.classList.add('pulsado');
       numImagesFiltradas.textContent = numImagesFiltradasNumber;
