@@ -67,6 +67,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
 
   if (imagenesFiltradas.length > 1) {
     const imagenesRelacionadasTitulo = document.createElement('h3');
+
     imagenesRelacionadasTitulo.classList.add('flexItemSolitario');
     imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
     fragmento.appendChild(imagenesRelacionadasTitulo);
