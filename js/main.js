@@ -134,8 +134,13 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
         botonPulsadoAnterior.classList.remove('pulsado');
       ev.target.classList.add('pulsado');
       numImagesFiltradas.textContent = numImagesFiltradasNumber;
-      pluralSingular[0].textContent = numImagesFiltradasNumber === 1 ? 'ha' : 'han';
-      pluralSingular[1].textContent = numImagesFiltradasNumber === 1 ? 'imagen' : 'imágenes';
+      if (numImagesFiltradasNumber === 1) {
+        pluralSingular[0].textContent = 'ha';
+        pluralSingular[1].textContent = 'imagen';
+      } else {
+        pluralSingular[0].textContent = 'han';
+        pluralSingular[1].textContent = 'imágenes';
+      }
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
   });
