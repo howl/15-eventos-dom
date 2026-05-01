@@ -33,14 +33,12 @@ body {
   flex-wrap: wrap;
 }
 
-.flexItemSolitario {
-  flex: 1 0 100%;
-}
-
-.flexItemPrincipio {
+.flexItemPrincipal {
+  flex-basis: 100%;
   order: -1;
 }
 
-.flexItemFinal {
+.flexItemSecundario {
+  flex-basis: 100%;
   order: 1;
 }
