@@ -123,11 +123,6 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   const botonesFiltrado = document.querySelector('#botonesFiltrado');
 
   document.addEventListener('click', ev => {
-    /*
-      Discrimino los botones por el id del padre, es necesario probar primero
-      si existe padre ya que si se hace click sobre el elemento HTML,
-      parentElement es null.
-    */
     if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
       const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
       const pluralSingular = document.querySelector('#pluralSingular');
