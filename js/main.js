@@ -150,6 +150,10 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       }
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
+
+    if (document.querySelector('#galeriaFotos').contains(ev.target)) {
+      console.log(ev.target);
+    }
   });
 
   generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes, 'todas'), botonesFiltrado);
