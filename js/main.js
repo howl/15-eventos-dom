@@ -48,21 +48,23 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
 
   elementoPadre.textContent = '';
   imagenesFiltradas.forEach((imagen, index) => {
+    const elemento = document.createElement('div');
     const imagenFigure = document.createElement('figure');
     const imagenImagen = document.createElement('img');
     const imagenCaption = document.createElement('figcaption');
     const imagenDescripcionExtendida = document.createElement('p');
 
-    imagenFigure.classList.add('cajaTransparente');
-    imagenFigure.classList.add('flexItem', !index ? 'flexItemPrincipal' : 'flexItemSecundario');
+    elemento.classList.add('cajaTransparente');
+    elemento.classList.add('flexItem', !index ? 'flexItemPrincipal' : 'flexItemSecundario');
     imagenImagen.src = imagen.src;
     imagenImagen.alt = imagen.pais;
     imagenCaption.textContent = imagen.pais;
     imagenDescripcionExtendida.textContent = imagen.descripcion;
     imagenFigure.appendChild(imagenImagen);
     imagenFigure.appendChild(imagenCaption);
-    imagenFigure.appendChild(imagenDescripcionExtendida);
-    fragmento.appendChild(imagenFigure);
+    elemento.appendChild(imagenFigure);
+    elemento.appendChild(imagenDescripcionExtendida);
+    fragmento.appendChild(elemento);
   });
 
   if (imagenesFiltradas.length > 1) {

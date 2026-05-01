@@ -87,6 +87,10 @@ img {
   flex-basis: 100%;
 }
 
+.flexItem>figure {
+  margin: 0;
+}
+
 .flexItemPrincipal {
   order: -1;
 }
