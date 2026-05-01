@@ -19,6 +19,13 @@ img {
   width: 100%
 }
 
+#cabeceraPrincipal>p {
+  font-size: 3em;
+  font-weight: 700;
+  text-align: center;
+  margin: 1.5dvh;
+}
+
 .negrita {
   font-weight: 700;
 }
