@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  font-family: "Cantarell", sans-serif;
+  color: white;
+  text-shadow: 1px 1px 2px black,
+    1px 1px 8px black;
+}
+
+body {
+  margin: 0;
+  background-image: url('../assets/background/1.jpg');
+  background-attachment: fixed;
+  background-position-y: -300px;
+  background-size: 230% 150%;
+  min-width: 280px;
+}
+
+.negrita {
+  font-weight: 700;
+}
+
+.cajaTransparente {
+  margin: 2dvw;
+  padding: 2dvw;
+  border-radius: 1dvw;
+  background: linear-gradient(rgba(0, 155, 255, 0.1), rgba(0, 80, 220, 0.2));
+  box-shadow: 0 0 0.9dvw 0.3vw rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flexItemSolitario {
+  flex: 1 0 100%;
+}
+
+.flexItemPrincipio {
+  order: -1;
+}
+
+.flexItemFinal {
+  order: 1;
+}
