@@ -3,7 +3,7 @@
  * @param {[]} elementos - Array de elementos de los que leer sus tags.
  * @returns {[]} - El array con los tags únicos.
  */
-const generarTagsDesdeElementos = (elementos) => {
+const generarTagsDesdeElementos = (elementos, primerTag) => {
   /*
     De las múltiples formas que se pueden hacer para obtener los elementos únicos,
     Ej: iterar cada array comprobando con includes en el array de destino si ya existe,
@@ -13,7 +13,8 @@ const generarTagsDesdeElementos = (elementos) => {
 
   elementos.forEach((elemento) => elemento.tags.forEach((tag) => tags.add(tag)));
 
-  return Array.from(tags).sort();
+  /* Colo el tag especificado en primerTag el primero y los demás de forma normal */
+  return Array.from(tags).sort((a, b) => a === primerTag ? false : b === primerTag ? true : a > b);
 };
 
 /**
@@ -145,5 +146,5 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     }
   });
 
-  generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes), botonesFiltrado);
+  generarBotonesDesdeTags(generarTagsDesdeElementos(imagenes, 'todas'), botonesFiltrado);
 })();
