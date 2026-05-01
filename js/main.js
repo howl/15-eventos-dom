@@ -125,7 +125,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   const botonesFiltrado = document.querySelector('#botonesFiltrado');
 
   document.addEventListener('click', ev => {
-    if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
+    if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado' && !ev.target.classList.contains('pulsado')) {
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
       const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
       const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
