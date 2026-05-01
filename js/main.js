@@ -33,6 +33,51 @@ const generarBotonesDesdeTags = (tags) => {
 };
 
 /**
+ * Filtra las imagenes por el tag añdiéndolas al elementoPadre devolviendo la
+ * cantidad de imágenes filtradas.
+ * @param {[]} imagenes - Array con las imagenes a filtrar.
+ * @param {string} tag - Tag por el que filtrar las imagenes.
+ * @param {Element} elementoPadre - Elemento al que colocar las imágenes.
+ * @returns {number} - Cantidad de imágenes filtradas.
+ */
+const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
+  const fragmento = document.createDocumentFragment();
+  const imagenesFiltradas = imagenes.filter(imagen => imagen.tags.includes(tag));
+
+  elementoPadre.textContent = '';
+  imagenesFiltradas.forEach((imagen, index) => {
+    const imagenFigure = document.createElement('figure');
+    const imagenImagen = document.createElement('img');
+    const imagenCaption = document.createElement('figcaption');
+    const imagenDescripcionExtendida = document.createElement('p');
+
+    if (!index)
+      imagenFigure.classList.add('flexItemPrincipio', 'flexItemSolitario');
+    else
+      imagenFigure.classList.add('flexItemFinal');
+    imagenImagen.src = imagen.src;
+    imagenImagen.alt = imagen.pais;
+    imagenCaption.textContent = imagen.pais;
+    imagenDescripcionExtendida.textContent = imagen.descripcion;
+    imagenFigure.appendChild(imagenImagen);
+    imagenFigure.appendChild(imagenCaption);
+    imagenFigure.appendChild(imagenDescripcionExtendida);
+    fragmento.appendChild(imagenFigure);
+  });
+
+  if (imagenesFiltradas.length > 1) {
+    const imagenesRelacionadasTitulo = document.createElement('h3');
+    imagenesRelacionadasTitulo.classList.add('flexItemSolitario');
+    imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
+    fragmento.appendChild(imagenesRelacionadasTitulo);
+  }
+
+  elementoPadre.appendChild(fragmento);
+
+  return imagenesFiltradas.length;
+};
+
+/**
  * Función de ejecución principal.
  */
 (() => {
