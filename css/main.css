@@ -15,13 +15,21 @@ body {
   min-width: 280px;
 }
 
+img {
+  width: 100%
+}
+
 .negrita {
   font-weight: 700;
 }
 
-.cajaTransparente {
+.margenRelleno {
   margin: 2dvw;
   padding: 2dvw;
+}
+
+.cajaTransparente {
+  overflow: hidden;
   border-radius: 1dvw;
   background: linear-gradient(rgba(0, 155, 255, 0.1), rgba(0, 80, 220, 0.2));
   box-shadow: 0 0 0.9dvw 0.3vw rgba(0, 0, 0, 0.3);
@@ -31,14 +39,46 @@ body {
 .flexContainer {
   display: flex;
   flex-wrap: wrap;
+  gap: 2dvw;
+}
+
+.flexItem {
+  margin: 0;
+  flex-basis: 100%;
 }
 
 .flexItemPrincipal {
-  flex-basis: 100%;
   order: -1;
 }
 
 .flexItemSecundario {
-  flex-basis: 100%;
   order: 1;
+}
+
+/* Dispositivos móviles medianos */
+@media screen and (min-width: 576px) {
+  .flexItemSecundario {
+    flex-basis: calc(50% - 1.002dvw);
+  }
+}
+
+/* Tablets */
+@media screen and (min-width: 768px) {
+  .flexItemSecundario {
+    flex-basis: calc(33.33% - 1.33dvw);
+  }
+}
+
+/* Pantallas de escritorio pequeñas */
+@media screen and (min-width: 992px) {
+  .flexItemSecundario {
+    flex-basis: calc(25% - 1.502dvw);
+  }
+}
+
+/* Pantallas de escritorio grandes */
+@media screen and (min-width: 1200px) {
+  .flexItemSecundario {
+    flex-basis: calc(16.66% - 1.662dvw);
+  }
 }

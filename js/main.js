@@ -51,10 +51,8 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     const imagenCaption = document.createElement('figcaption');
     const imagenDescripcionExtendida = document.createElement('p');
 
-    if (!index)
-      imagenFigure.classList.add('flexItemPrincipal');
-    else
-      imagenFigure.classList.add('flexItemSecundario');
+    imagenFigure.classList.add('cajaTransparente');
+    imagenFigure.classList.add('flexItem', !index ? 'flexItemPrincipal' : 'flexItemSecundario');
     imagenImagen.src = imagen.src;
     imagenImagen.alt = imagen.pais;
     imagenCaption.textContent = imagen.pais;
@@ -68,7 +66,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   if (imagenesFiltradas.length > 1) {
     const imagenesRelacionadasTitulo = document.createElement('h3');
 
-    imagenesRelacionadasTitulo.classList.add('flexItemPrincipal');
+    imagenesRelacionadasTitulo.classList.add('flexItem', 'flexItemPrincipal');
     imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
     fragmento.appendChild(imagenesRelacionadasTitulo);
   }
