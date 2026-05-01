@@ -128,7 +128,11 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       parentElement es null.
     */
     if (ev.target.parentElement && ev.target.parentElement.id === 'botonesFiltrado') {
+      const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
       const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
+      const galeriaFotos = document.querySelector('#galeriaFotos');
+
+      numImagesFiltradas.textContent = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos);
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
   });
