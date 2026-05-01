@@ -129,10 +129,14 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     */
     if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
       const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
+      const pluralSingular = document.querySelector('#pluralSingular');
       const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
       const galeriaFotos = document.querySelector('#galeriaFotos');
+      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos)
 
-      numImagesFiltradas.textContent = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos);
+      numImagesFiltradas.textContent = numImagesFiltradasNumber;
+      pluralSingular.textContent = numImagesFiltradasNumber === 1 ? 'imagen' : 'imágenes';
+
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
   });
