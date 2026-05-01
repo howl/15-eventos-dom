@@ -125,13 +125,14 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   document.addEventListener('click', ev => {
     if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
       const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
-      const pluralSingular = document.querySelector('#pluralSingular');
+      const pluralSingular = document.querySelectorAll('.pluralSingular');
       const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
       const galeriaFotos = document.querySelector('#galeriaFotos');
       const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos)
 
       numImagesFiltradas.textContent = numImagesFiltradasNumber;
-      pluralSingular.textContent = numImagesFiltradasNumber === 1 ? 'imagen' : 'imágenes';
+      pluralSingular[0].textContent = numImagesFiltradasNumber === 1 ? 'ha' : 'han';
+      pluralSingular[1].textContent = numImagesFiltradasNumber === 1 ? 'imagen' : 'imágenes';
 
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
