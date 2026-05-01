@@ -127,7 +127,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       si existe padre ya que si se hace click sobre el elemento HTML,
       parentElement es null.
     */
-    if (ev.target.parentElement && ev.target.parentElement.id === 'botonesFiltrado') {
+    if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado') {
       const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
       const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
       const galeriaFotos = document.querySelector('#galeriaFotos');
