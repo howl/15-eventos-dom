@@ -102,12 +102,12 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       src: 'assets/images/viajes/viajes-4.jpg',
       pais: 'España',
       descripcion: 'Sevilla tiene un color especial.',
-      tags: ['ciudad', 'sol', 'calor'],
+      tags: ['ciudad', 'sol', 'calor', 'histórico'],
     }, {
       src: 'assets/images/viajes/viajes-5.jpg',
       pais: 'España',
       descripcion: 'La misma plaza desde otro lado, o quizás es Naboo.',
-      tags: ['ciudad', 'sol', 'calor'],
+      tags: ['ciudad', 'sol', 'calor', 'histórico'],
     }, {
       src: 'assets/images/viajes/viajes-6.jpg',
       pais: 'España',
