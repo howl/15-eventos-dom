@@ -26,6 +26,7 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 
   tags.forEach((tag) => {
     const nuevoButton = fragmento.appendChild(document.createElement('button'));
+    nuevoButton.classList.add('cajaTransparente');
     nuevoButton.textContent = tag;
   });
 
@@ -127,11 +128,14 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
       const galeriaFotos = document.querySelector('#galeriaFotos');
       const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, galeriaFotos)
+      const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
 
+      if (botonPulsadoAnterior)
+        botonPulsadoAnterior.classList.remove('pulsado');
+      ev.target.classList.add('pulsado');
       numImagesFiltradas.textContent = numImagesFiltradasNumber;
       pluralSingular[0].textContent = numImagesFiltradasNumber === 1 ? 'ha' : 'han';
       pluralSingular[1].textContent = numImagesFiltradasNumber === 1 ? 'imagen' : 'imágenes';
-
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
   });

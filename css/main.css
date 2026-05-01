@@ -21,9 +21,31 @@ img {
 
 #cabeceraPrincipal>p {
   font-size: 3em;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
   margin: 1.5dvh;
+}
+
+#botonesFiltrado>button {
+  font-size: 1rem;
+  text-transform: capitalize;
+  padding: 1dvw 2dvw 1dvw 1dvw;
+}
+
+#botonesFiltrado>button::before {
+  content: '🏷️';
+  margin-right: 1dvw;
+  text-shadow: none;
+}
+
+#botonesFiltrado>button:hover {
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(150, 150, 150, 0.2));
+}
+
+#botonesFiltrado>button:active,
+#botonesFiltrado>button.pulsado {
+  background: linear-gradient(rgba(80, 80, 80, 0.1), rgba(255, 255, 255, 0.2));
+  color: lightgrey;
 }
 
 .negrita {
@@ -37,6 +59,8 @@ img {
 
 .cajaTransparente {
   overflow: hidden;
+  /* Uso este estilo entre otros también para los botones y estos tienen borde por defecto. */
+  border: none;
   border-radius: 1dvw;
   background: linear-gradient(rgba(0, 155, 255, 0.1), rgba(0, 80, 220, 0.2));
   box-shadow: 0 0 0.9dvw 0.3vw rgba(0, 0, 0, 0.3);
