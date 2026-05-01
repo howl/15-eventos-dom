@@ -1,7 +1,7 @@
 /**
  * Genera un array con los tags únicos presentes en una serie de elementos con tags.
  * @param {[]} elementos - Array de elementos de los que leer sus tags.
- * @returns {[]} - El Set con los tags únicos.
+ * @returns {[]} - El array con los tags únicos.
  */
 const generarTagsDesdeElementos = (elementos) => {
   /*
@@ -18,7 +18,7 @@ const generarTagsDesdeElementos = (elementos) => {
 
 /**
  * Genera los botones de filtrado en base a las etiquetas que se le pasan.
- * @param {[]} tags - Un Set con los tags para los que hacer botones.
+ * @param {[]} tags - Un array con los tags para los que hacer botones.
  * @param {Element} elementoPadre - Elemento al que colocar las botones.
  */
 const generarBotonesDesdeTags = (tags, elementoPadre) => {
