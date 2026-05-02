@@ -164,22 +164,19 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
 
-    /* Click sobre cualquier elemento de la galeria menos la propia galeria */
-    if (document.querySelector('#galeriaFotos').contains(ev.target) && document.querySelector('#galeriaFotos') !== ev.target) {
+    /* Click sobre cualquier elemento de la galeria menos la propia galeria y el título de la sección secundaria */
+    if (document.querySelector('#galeriaFotos').contains(ev.target) && ev.target !== document.querySelector('#galeriaFotos') && ev.target.tagName !== 'H3') {
+      const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
       let flexItemPulsado = ev.target;
 
       while (!flexItemPulsado.classList.contains('flexItem'))
         flexItemPulsado = flexItemPulsado.parentElement;
-      if (flexItemPulsado.tagName !== 'H3') {
-        const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
-
-        if (flexItemPrincipal !== flexItemPulsado) {
-          flexItemPrincipal.classList.remove('flexItemPrincipal');
-          flexItemPrincipal.classList.add('flexItemSecundario');
-          flexItemPulsado.classList.add('flexItemPrincipal');
-          flexItemPulsado.classList.remove('flexItemSecundario');
-          flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (flexItemPrincipal !== flexItemPulsado) {
+        flexItemPrincipal.classList.remove('flexItemPrincipal');
+        flexItemPrincipal.classList.add('flexItemSecundario');
+        flexItemPulsado.classList.add('flexItemPrincipal');
+        flexItemPulsado.classList.remove('flexItemSecundario');
+        flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
       }
     }
   });
