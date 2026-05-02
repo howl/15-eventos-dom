@@ -37,7 +37,6 @@ img {
 
 .margenRelleno {
   /* Ajusto el margen para que no sobresalgan más allá de la página las imagenes con el efecto de agrandado */
-  /* TODO: Con esto funciona bien para todos los casos menos cuando hay solo una columna de secundarias, darle una vuelta. */
   margin: 2.5dvw;
   padding: 2dvw;
 }
@@ -85,10 +84,26 @@ img {
   scroll-margin-top: 2dvw;
 }
 
+.flexItemSecundario,
+#botonesFiltrado>button {
+  order: 1;
+  transition: transform 0.3s ease;
+}
+
 .flexItemSecundario>div>p {
   opacity: 0;
   transform: translateY(-2em);
   transition: all 0.5s ease;
+}
+
+.flexItemSecundario:hover {
+  transform: scale(1.09);
+}
+
+.flexItemSecundario:hover,
+#botonesFiltrado>button:not(.pulsado):hover {
+  z-index: 1;
+  cursor: pointer;
 }
 
 .flexItemSecundario:hover>div {
@@ -113,12 +128,6 @@ img {
   padding: 1dvw 2dvw 1dvw 1dvw;
 }
 
-#botonesFiltrado>button,
-.flexItemSecundario {
-  order: 1;
-  transition: transform 0.3s ease;
-}
-
 #botonesFiltrado>button::before {
   content: '🏷️';
   margin-right: 1dvw;
@@ -129,11 +138,8 @@ img {
   background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(150, 150, 150, 0.2));
 }
 
-#botonesFiltrado>button:not(.pulsado):hover,
-.flexItemSecundario:hover {
+#botonesFiltrado>button:not(.pulsado):hover {
   transform: scale(1.2);
-  z-index: 1;
-  cursor: pointer;
 }
 
 #botonesFiltrado>button:active,
@@ -147,6 +153,10 @@ img {
 @media screen and (min-width: 576px) {
   .flexItemSecundario {
     flex-basis: calc(50% - 1.002dvw);
+  }
+
+  .flexItemSecundario:hover {
+    transform: scale(1.2);
   }
 }
 
