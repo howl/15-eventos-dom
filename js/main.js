@@ -161,7 +161,6 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
 
     if (document.querySelector('#galeriaFotos').contains(ev.target) && document.querySelector('#galeriaFotos') !== ev.target) {
       let flexItemPulsado = ev.target;
-      console.log(flexItemPulsado);
 
       while (!flexItemPulsado.classList.contains('flexItem'))
         flexItemPulsado = flexItemPulsado.parentElement;

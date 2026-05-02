@@ -104,8 +104,17 @@ img {
   scroll-margin-top: 2dvw;
 }
 
+#botonesFiltrado>button,
 .flexItemSecundario {
   order: 1;
+  transition: transform 0.3s ease;
+}
+
+#botonesFiltrado>button:not(.pulsado):hover,
+.flexItemSecundario:hover {
+  transform: scale(1.2);
+  z-index: 1;
+  cursor: pointer;
 }
 
 .flexItemSecundario>p {
