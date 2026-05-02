@@ -47,6 +47,20 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   const imagenesFiltradas = imagenes.filter(imagen => imagen.tags.includes(tag));
 
   elementoPadre.textContent = '';
+  /*
+    Es importante colocar el primero en la estructura HTML el título de la
+    sección secundaria, ya que sino el efecto de scroll suave para la imagen que
+    es principal por defecto al pasarla    a secundaria y retornarla a principal
+    hace un desplazamiento brusco a la parte superior de la página y luego baja suave.
+    Así lo hace desde abajo sin movimiento brusco inicial como las demás.
+  */
+  if (imagenesFiltradas.length > 1) {
+    const imagenesRelacionadasTitulo = document.createElement('h3');
+
+    imagenesRelacionadasTitulo.classList.add('flexItem');
+    imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
+    fragmento.appendChild(imagenesRelacionadasTitulo);
+  }
   imagenesFiltradas.forEach((imagen, index) => {
     const elemento = document.createElement('div');
     const imagenFigure = document.createElement('figure');
@@ -66,14 +80,6 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     elemento.appendChild(imagenDescripcionExtendida);
     fragmento.appendChild(elemento);
   });
-
-  if (imagenesFiltradas.length > 1) {
-    const imagenesRelacionadasTitulo = document.createElement('h3');
-
-    imagenesRelacionadasTitulo.classList.add('flexItem', 'flexItemPrincipal');
-    imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
-    fragmento.appendChild(imagenesRelacionadasTitulo);
-  }
 
   elementoPadre.appendChild(fragmento);
 
@@ -167,12 +173,6 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
           flexItemPrincipal.classList.add('flexItemSecundario');
           flexItemPulsado.classList.add('flexItemPrincipal');
           flexItemPulsado.classList.remove('flexItemSecundario');
-          /*
-            FIXME: Cuando el elemento originalmente como principal está como
-            secundario y se le vuelve a poner como principal, el scroll salta
-            antes al inicio de la página brucamente y luego ya se posiciona
-            suavemente al elemento.
-          */
           flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
         }
       }
