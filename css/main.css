@@ -163,7 +163,7 @@ img {
 /* Tablets */
 @media screen and (min-width: 768px) {
   .flexItemSecundario {
-    flex-basis: calc(33.33% - 1.33dvw);
+    flex-basis: calc(33.33% - 1.331dvw);
   }
 }
 
