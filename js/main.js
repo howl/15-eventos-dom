@@ -170,6 +170,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
         pluralSingular[1].textContent = 'imágenes';
       }
       etiquetaFiltrada.textContent = ev.target.textContent;
+      ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
     }
 
     /* Click sobre cualquier elemento de la galeria menos la propia galeria y el título de la sección secundaria */
