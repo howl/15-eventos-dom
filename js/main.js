@@ -173,20 +173,19 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
     }
 
-    /* Click sobre cualquier elemento de la galeria menos la propia galeria y el título de la sección secundaria */
-    if (document.querySelector('#galeriaFotos').contains(ev.target) && ev.target !== document.querySelector('#galeriaFotos') && ev.target.tagName !== 'H3') {
+    /*
+      Click sobre cualquier elemento que tengo algún antecesor siendo un div con
+      clase flexItem pero no flexItemPrincipal e hijo directo de galeriaFotos
+    */
+    if (ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)')) {
+      const flexItemPulsado = ev.target.closest('.flexItem');
       const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
-      let flexItemPulsado = ev.target;
 
-      while (!flexItemPulsado.classList.contains('flexItem'))
-        flexItemPulsado = flexItemPulsado.parentElement;
-      if (flexItemPrincipal !== flexItemPulsado) {
-        flexItemPrincipal.classList.remove('flexItemPrincipal');
-        flexItemPrincipal.classList.add('flexItemSecundario');
-        flexItemPulsado.classList.add('flexItemPrincipal');
-        flexItemPulsado.classList.remove('flexItemSecundario');
-        flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
-      }
+      flexItemPrincipal.classList.remove('flexItemPrincipal');
+      flexItemPrincipal.classList.add('flexItemSecundario');
+      flexItemPulsado.classList.add('flexItemPrincipal');
+      flexItemPulsado.classList.remove('flexItemSecundario');
+      flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
