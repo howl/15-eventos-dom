@@ -151,6 +151,10 @@ img {
 
 /* Dispositivos móviles medianos */
 @media screen and (min-width: 576px) {
+  .flexItemPrincipal {
+    margin: 0 15dvw;
+  }
+
   .flexItemSecundario {
     flex-basis: calc(50% - 1.002dvw);
   }
@@ -162,6 +166,10 @@ img {
 
 /* Tablets */
 @media screen and (min-width: 768px) {
+  .flexItemPrincipal {
+    margin: 0 20dvw;
+  }
+
   .flexItemSecundario {
     flex-basis: calc(33.33% - 1.331dvw);
   }
@@ -169,6 +177,10 @@ img {
 
 /* Pantallas de escritorio pequeñas */
 @media screen and (min-width: 992px) {
+  .flexItemPrincipal {
+    margin: 0 25dvw;
+  }
+
   .flexItemSecundario {
     flex-basis: calc(25% - 1.502dvw);
   }
