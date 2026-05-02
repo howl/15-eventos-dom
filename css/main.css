@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Cantarell', sans-serif;
+  font-family: 'Cantarell', 'Cantarell-embedded', sans-serif;
   font-weight: 400;
   font-style: normal;
   color: white;
@@ -30,7 +30,7 @@ h4,
 h5,
 h6,
 #cabeceraPrincipal>p {
-  font-family: 'Comfortaa', sans-serif;
+  font-family: 'Comfortaa', 'Comfortaa-embedded', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
