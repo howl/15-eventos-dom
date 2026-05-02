@@ -47,7 +47,7 @@ img {
   border-radius: 1dvw;
   background: linear-gradient(rgba(0, 155, 255, 0.1), rgba(0, 80, 220, 0.2));
   box-shadow: 0 0 0.9dvw 0.3vw rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
 }
 
 .flexContainer {
