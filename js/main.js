@@ -67,14 +67,22 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     const imagenFigure = document.createElement('figure');
     const imagenImagen = document.createElement('img');
     const imagenCaption = document.createElement('figcaption');
+    const imagenCaptionLabel = document.createElement('span');
     const imagenDescripcionExtendida = document.createElement('p');
+    const imagenDescripcionExtendidaLabel = document.createElement('span');
 
     elemento.classList.add('cajaTransparente');
     elemento.classList.add('flexItem', !index ? 'flexItemPrincipal' : 'flexItemSecundario');
     imagenImagen.src = imagen.src;
     imagenImagen.alt = imagen.pais;
-    imagenCaption.textContent = imagen.pais;
-    imagenDescripcionExtendida.textContent = imagen.descripcion;
+    imagenCaptionLabel.classList.add('negrita');
+    imagenCaptionLabel.appendChild(document.createTextNode('Título'));
+    imagenCaption.appendChild(imagenCaptionLabel);
+    imagenCaption.appendChild(document.createTextNode(`: ${imagen.pais}`));
+    imagenDescripcionExtendidaLabel.classList.add('negrita');
+    imagenDescripcionExtendidaLabel.appendChild(document.createTextNode('Descripción'));
+    imagenDescripcionExtendida.appendChild(imagenDescripcionExtendidaLabel);
+    imagenDescripcionExtendida.appendChild(document.createTextNode(`: ${imagen.descripcion}`));
     imagenFigure.appendChild(imagenImagen);
     imagenFigure.appendChild(imagenCaption);
     contenedorInterior.appendChild(imagenFigure);
