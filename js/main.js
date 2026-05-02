@@ -144,8 +144,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     /* Como uso un único listener general, no secciono cada parte en funciones distintas ya que no va a existir reuso de código */
 
     /* Click sobre cualquier tag no pulsado actualmente */
-    if (ev.target.closest('#botonesFiltrado>button:not(.pulsado)')) {
-      const botonPulsado = ev.target.closest('button');
+    if (botonPulsado = ev.target.closest('#botonesFiltrado>button:not(.pulsado)')) {
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
       const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
       const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, botonPulsado.textContent, document.querySelector('#galeriaFotos'))
@@ -176,8 +175,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       Click sobre cualquier elemento que tengo algún antecesor siendo un div con
       clase flexItem pero no flexItemPrincipal e hijo directo de galeriaFotos
     */
-    if (ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)')) {
-      const flexItemPulsado = ev.target.closest('.flexItem');
+    if (flexItemPulsado = ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)')) {
       const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
 
       flexItemPrincipal.classList.remove('flexItemPrincipal');
