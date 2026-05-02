@@ -145,9 +145,10 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
 
     /* Click sobre cualquier tag no pulsado actualmente */
     if (ev.target.closest('#botonesFiltrado>button:not(.pulsado)')) {
+      const botonPulsado = ev.target.closest('button');
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
       const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
-      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, document.querySelector('#galeriaFotos'))
+      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, botonPulsado.textContent, document.querySelector('#galeriaFotos'))
 
       if (!botonPulsadoAnterior) {
         const infoDeUso = document.querySelector('#infoDeUso');
@@ -158,7 +159,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       }
       else
         botonPulsadoAnterior.classList.remove('pulsado');
-      ev.target.classList.add('pulsado');
+      botonPulsado.classList.add('pulsado');
       document.querySelector('#numImagesFiltradas').textContent = numImagesFiltradasNumber;
       if (numImagesFiltradasNumber === 1) {
         pluralSingular[0].textContent = 'ha';
@@ -167,7 +168,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
         pluralSingular[0].textContent = 'han';
         pluralSingular[1].textContent = 'imágenes';
       }
-      document.querySelector('#etiquetaFiltrada').textContent = ev.target.textContent;
+      document.querySelector('#etiquetaFiltrada').textContent = botonPulsado.textContent;
       ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
     }
 
