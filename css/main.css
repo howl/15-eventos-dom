@@ -15,9 +15,12 @@ body {
   min-width: 280px;
 }
 
+main {
+  text-align: center;
+}
+
 h1 {
   margin-top: 0;
-  text-align: center;
 }
 
 img {
@@ -81,6 +84,10 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 2dvw;
+}
+
+.flexCentrado {
+  justify-content: center;
 }
 
 .flexItem {
