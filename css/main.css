@@ -84,6 +84,10 @@ img {
   scroll-margin-top: 2dvw;
 }
 
+.flexItemPrincipal>div>p {
+  margin: 2dvw;
+}
+
 .flexItemSecundario,
 #botonesFiltrado>button {
   order: 1;
@@ -91,6 +95,7 @@ img {
 }
 
 .flexItemSecundario>div>p {
+  margin: 1dvw;
   opacity: 0;
   transform: translateY(-2em);
   transition: all 0.5s ease;
