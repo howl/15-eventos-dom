@@ -101,6 +101,10 @@ img {
   order: 1;
 }
 
+.flexItemSecundario>p {
+  display: none;
+}
+
 /* Dispositivos móviles medianos */
 @media screen and (min-width: 576px) {
   .flexItemSecundario {
