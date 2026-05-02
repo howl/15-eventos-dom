@@ -96,6 +96,9 @@ img {
 
 .flexItem>figure {
   margin: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 .flexItemPrincipal {
@@ -115,6 +118,10 @@ img {
   transform: scale(1.2);
   z-index: 1;
   cursor: pointer;
+}
+
+.flexItemSecundario:hover figure {
+  transform: scale(0.90);
 }
 
 .flexItemSecundario>p {
