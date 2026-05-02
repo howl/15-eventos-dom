@@ -167,6 +167,12 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
           flexItemPrincipal.classList.add('flexItemSecundario');
           flexItemPulsado.classList.add('flexItemPrincipal');
           flexItemPulsado.classList.remove('flexItemSecundario');
+          /*
+            FIXME: Cuando el elemento originalmente como principal está como
+            secundario y se le vuelve a poner como principal, el scroll salta
+            antes al inicio de la página brucamente y luego ya se posiciona
+            suavemente al elemento.
+          */
           flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
         }
       }
