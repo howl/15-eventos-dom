@@ -153,8 +153,23 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
 
-    if (document.querySelector('#galeriaFotos').contains(ev.target)) {
-      console.log(ev.target);
+    if (document.querySelector('#galeriaFotos').contains(ev.target) && document.querySelector('#galeriaFotos') !== ev.target) {
+      let flexItemPulsado = ev.target;
+      console.log(flexItemPulsado);
+
+      while (!flexItemPulsado.classList.contains('flexItem'))
+        flexItemPulsado = flexItemPulsado.parentElement;
+      if (flexItemPulsado.tagName !== 'H3') {
+        const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
+
+        if (flexItemPrincipal !== flexItemPulsado) {
+          flexItemPrincipal.classList.remove('flexItemPrincipal');
+          flexItemPrincipal.classList.add('flexItemSecundario');
+          flexItemPulsado.classList.add('flexItemPrincipal');
+          flexItemPulsado.classList.remove('flexItemSecundario');
+          flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }
   });
 
