@@ -36,12 +36,13 @@ img {
 }
 
 .margenRelleno {
-  margin: 2dvw;
+  /* Ajusto el margen para que no sobresalgan más allá de la página las imagenes con el efecto de agrandado */
+  /* TODO: Con esto funciona bien para todos los casos menos cuando hay solo una columna de secundarias, darle una vuelta. */
+  margin: 2.5dvw;
   padding: 2dvw;
 }
 
 .cajaTransparente {
-  overflow: hidden;
   /* Uso este estilo entre otros también para los botones y estos tienen borde por defecto. */
   border: none;
   border-radius: 1dvw;
