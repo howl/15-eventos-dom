@@ -133,6 +133,9 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   const botonesFiltrado = document.querySelector('#botonesFiltrado');
 
   document.addEventListener('click', ev => {
+    /* Como uso un único listener general, no secciono cada parte en funciones distintas ya que no va a existir reuso de código */
+
+    /* Click sobre cualquier tag no pulsado actualmente */
     if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado' && !ev.target.classList.contains('pulsado')) {
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
       const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
@@ -161,6 +164,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       etiquetaFiltrada.textContent = ev.target.textContent;
     }
 
+    /* Click sobre cualquier elemento de la galeria menos la propia galeria */
     if (document.querySelector('#galeriaFotos').contains(ev.target) && document.querySelector('#galeriaFotos') !== ev.target) {
       let flexItemPulsado = ev.target;
 
