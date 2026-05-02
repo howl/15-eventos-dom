@@ -63,6 +63,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
   }
   imagenesFiltradas.forEach((imagen, index) => {
     const elemento = document.createElement('div');
+    const contenedorInterior = document.createElement('div');
     const imagenFigure = document.createElement('figure');
     const imagenImagen = document.createElement('img');
     const imagenCaption = document.createElement('figcaption');
@@ -76,8 +77,9 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     imagenDescripcionExtendida.textContent = imagen.descripcion;
     imagenFigure.appendChild(imagenImagen);
     imagenFigure.appendChild(imagenCaption);
-    elemento.appendChild(imagenFigure);
-    elemento.appendChild(imagenDescripcionExtendida);
+    contenedorInterior.appendChild(imagenFigure);
+    contenedorInterior.appendChild(imagenDescripcionExtendida);
+    elemento.appendChild(contenedorInterior);
     fragmento.appendChild(elemento);
   });
 

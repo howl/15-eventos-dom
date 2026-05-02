@@ -94,11 +94,14 @@ img {
   flex-basis: 100%;
 }
 
-.flexItem>figure {
-  margin: 0;
+.flexItem>div {
   border-radius: inherit;
   overflow: hidden;
   transition: transform 0.3s ease;
+}
+
+.flexItem>div>figure {
+  margin: 0;
 }
 
 .flexItemPrincipal {
@@ -120,13 +123,9 @@ img {
   cursor: pointer;
 }
 
-.flexItemSecundario:hover figure {
+.flexItemSecundario:hover>div {
   transform: scale(0.90);
 }
-
-/* .flexItemSecundario>p {
-  display: none;
-} */
 
 /* Dispositivos móviles medianos */
 @media screen and (min-width: 576px) {
