@@ -144,11 +144,9 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     /* Como uso un único listener general, no secciono cada parte en funciones distintas ya que no va a existir reuso de código */
 
     /* Click sobre cualquier tag no pulsado actualmente */
-    if (ev.target.tagName === 'BUTTON' && ev.target.parentElement.id === 'botonesFiltrado' && !ev.target.classList.contains('pulsado')) {
+    if (ev.target.closest('#botonesFiltrado>button:not(.pulsado)')) {
       const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
       const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
-      const numImagesFiltradas = document.querySelector('#numImagesFiltradas');
-      const etiquetaFiltrada = document.querySelector('#etiquetaFiltrada');
       const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, ev.target.textContent, document.querySelector('#galeriaFotos'))
 
       if (!botonPulsadoAnterior) {
@@ -161,7 +159,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       else
         botonPulsadoAnterior.classList.remove('pulsado');
       ev.target.classList.add('pulsado');
-      numImagesFiltradas.textContent = numImagesFiltradasNumber;
+      document.querySelector('#numImagesFiltradas').textContent = numImagesFiltradasNumber;
       if (numImagesFiltradasNumber === 1) {
         pluralSingular[0].textContent = 'ha';
         pluralSingular[1].textContent = 'imagen';
@@ -169,7 +167,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
         pluralSingular[0].textContent = 'han';
         pluralSingular[1].textContent = 'imágenes';
       }
-      etiquetaFiltrada.textContent = ev.target.textContent;
+      document.querySelector('#etiquetaFiltrada').textContent = ev.target.textContent;
       ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
     }
 
