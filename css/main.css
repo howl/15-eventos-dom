@@ -96,7 +96,7 @@ img {
   margin: 0;
 }
 
-.flexItem>div>p {
+.flexItem>div>p * {
   font-style: italic;
 }
 
