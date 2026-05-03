@@ -112,6 +112,11 @@ img {
   margin: 0;
 }
 
+.flexItem>div>figure>img {
+  margin: 0;
+  pointer-events: none;
+}
+
 .flexItemPrincipal {
   order: -1;
   /* Esta propiedad permite que al hacer scroll a un elemento no quede ajustado a la parte superior de la ventana sino que le de un margen. */
