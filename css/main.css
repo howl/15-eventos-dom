@@ -183,6 +183,7 @@ img {
 
   .flexItemSecundario {
     flex-basis: calc(50% - 1.002dvw);
+    /* flex-basis: calc(50% - 1.17dvw); */
   }
 
   .flexItemSecundario:hover {
@@ -198,6 +199,7 @@ img {
 
   .flexItemSecundario {
     flex-basis: calc(33.33% - 1.331dvw);
+    /* flex-basis: calc(33.33% - 1.49dvw); */
   }
 }
 
@@ -209,6 +211,7 @@ img {
 
   .flexItemSecundario {
     flex-basis: calc(25% - 1.502dvw);
+    /* flex-basis: calc(25% - 1.63dvw); */
   }
 }
 
@@ -216,5 +219,6 @@ img {
 @media screen and (min-width: 1200px) {
   .flexItemSecundario {
     flex-basis: calc(20% - 1.601dvw);
+    /* flex-basis: calc(20% - 1.74dvw); */
   }
 }
