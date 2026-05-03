@@ -90,6 +90,10 @@ img {
   flex-basis: 100%;
 }
 
+.flexItem * {
+  pointer-events: none;
+}
+
 .flexItem>div {
   border-radius: inherit;
   overflow: hidden;
