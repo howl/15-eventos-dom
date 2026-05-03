@@ -43,3 +43,17 @@ El ejercicio ha de cumplir una serie de condiciones:
 - Ha de realizarse en un repositorio Git en una rama distinta a la principal realizando diversos commits en base a según se realiza el ejercicio.
 - Usar exclusivamente HTML (utilizando correctamente etiquetas semánticas), CSS (haciendo uso adecuado de selectores) y JavaScript (creando funciones de forma racional).
 - Ha de tener un diseño responsive para múltiples dispositivos.
+
+## Validación
+
+### HTML
+
+![Validación HTML](assets/images/readme/html-validation.png)
+
+### CSS: main
+
+![Validación CSS de main.css](assets/images/readme/css-main-validation.png)
+
+### CSS: fonts
+
+![Validación CSS de fonts.css](assets/images/readme/css-fonts-validation.png)
