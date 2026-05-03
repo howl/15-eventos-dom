@@ -62,7 +62,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     fragmento.appendChild(imagenesRelacionadasTitulo);
   }
   imagenesFiltradas.forEach((imagen, index) => {
-    const elemento = document.createElement('div');
+    const elemento = document.createElement('button');
     const contenedorInterior = document.createElement('div');
     const imagenFigure = document.createElement('figure');
     const imagenImagen = document.createElement('img');
@@ -182,7 +182,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
       clase flexItem pero no flexItemPrincipal e hijo directo de galeriaFotos
     */
     {
-      const flexItemPulsado = ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)');
+      const flexItemPulsado = ev.target.closest('#galeriaFotos>button.flexItem:not(.flexItemPrincipal)');
       if (flexItemPulsado) {
         const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
 

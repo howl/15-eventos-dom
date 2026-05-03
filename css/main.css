@@ -88,9 +88,21 @@ img {
 
 .flexItem {
   flex-basis: 100%;
+  /*
+    Después de convertir los flexItems de la galería a botones he tenido que
+    usar display, padding y font-size para replicar como se veía con un div.
+  */
+  display: inline-flex;
+  padding: 0;
+  font-size: 1rem;
 }
 
 .flexItem>div {
+  /*
+    Después de convertir los flexItems de la galería a botones he tenido que
+    usar flex-basis.
+  */
+  flex-basis: 100%;
   border-radius: inherit;
   overflow: hidden;
   transition: transform 0.3s ease;
