@@ -58,7 +58,7 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     const imagenesRelacionadasTitulo = document.createElement('h3');
 
     imagenesRelacionadasTitulo.classList.add('flexItem');
-    imagenesRelacionadasTitulo.textContent = 'Imágenes relacionadas';
+    imagenesRelacionadasTitulo.textContent = 'Viajes relacionados';
     fragmento.appendChild(imagenesRelacionadasTitulo);
   }
   imagenesFiltradas.forEach((imagen, index) => {
@@ -167,10 +167,10 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
         document.querySelector('#numImagesFiltradas').textContent = numImagesFiltradasNumber;
         if (numImagesFiltradasNumber === 1) {
           pluralSingular[0].textContent = 'ha';
-          pluralSingular[1].textContent = 'imagen';
+          pluralSingular[1].textContent = 'viaje';
         } else {
           pluralSingular[0].textContent = 'han';
-          pluralSingular[1].textContent = 'imágenes';
+          pluralSingular[1].textContent = 'viajes';
         }
         document.querySelector('#etiquetaFiltrada').textContent = botonPulsado.textContent;
         ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
