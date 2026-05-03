@@ -84,7 +84,9 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     imagenCaptionLabel.appendChild(document.createTextNode('Título'));
     imagenCaption.appendChild(document.createTextNode(`: ${imagen.pais}`));
     contenedorInterior.appendChild(imagenDescripcionExtendida);
+    imagenDescripcionExtendida.classList.add('cursiva');
     imagenDescripcionExtendida.appendChild(imagenDescripcionExtendidaLabel);
+    imagenDescripcionExtendidaLabel.classList.add('cursiva');
     imagenDescripcionExtendidaLabel.classList.add('negrita');
     imagenDescripcionExtendidaLabel.appendChild(document.createTextNode('Descripción'));
     imagenDescripcionExtendida.appendChild(document.createTextNode(`: ${imagen.descripcion}`));

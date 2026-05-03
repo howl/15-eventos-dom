@@ -57,6 +57,10 @@ img {
   font-weight: 700;
 }
 
+.cursiva {
+  font-style: italic;
+}
+
 .margenRelleno {
   /* Ajusto el margen para que no sobresalgan más allá de la página las imagenes con el efecto de agrandado */
   margin: 2.5dvw;
@@ -94,10 +98,6 @@ img {
 
 .flexItem>div>figure {
   margin: 0;
-}
-
-.flexItem>div>p * {
-  font-style: italic;
 }
 
 .flexItemPrincipal {
