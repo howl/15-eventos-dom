@@ -144,45 +144,51 @@ const mostrarImagenesConTag = (imagenes, tag, elementoPadre) => {
     /* Como uso un único listener general, no secciono cada parte en funciones distintas ya que no va a existir reuso de código */
 
     /* Click sobre cualquier tag no pulsado actualmente */
-    if (botonPulsado = ev.target.closest('#botonesFiltrado>button:not(.pulsado)')) {
-      const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
-      const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
-      const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, botonPulsado.textContent, document.querySelector('#galeriaFotos'))
+    {
+      const botonPulsado = ev.target.closest('#botonesFiltrado>button:not(.pulsado)');
+      if (botonPulsado) {
+        const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
+        const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
+        const numImagesFiltradasNumber = mostrarImagenesConTag(imagenes, botonPulsado.textContent, document.querySelector('#galeriaFotos'))
 
-      if (!botonPulsadoAnterior) {
-        const infoDeUso = document.querySelector('#infoDeUso');
-        const infoDeFiltrado = document.querySelector('#infoDeFiltrado');
+        if (!botonPulsadoAnterior) {
+          const infoDeUso = document.querySelector('#infoDeUso');
+          const infoDeFiltrado = document.querySelector('#infoDeFiltrado');
 
-        infoDeUso.classList.toggle('displayNone');
-        infoDeFiltrado.classList.toggle('displayNone');
+          infoDeUso.classList.toggle('displayNone');
+          infoDeFiltrado.classList.toggle('displayNone');
+        }
+        else
+          botonPulsadoAnterior.classList.remove('pulsado');
+        botonPulsado.classList.add('pulsado');
+        document.querySelector('#numImagesFiltradas').textContent = numImagesFiltradasNumber;
+        if (numImagesFiltradasNumber === 1) {
+          pluralSingular[0].textContent = 'ha';
+          pluralSingular[1].textContent = 'imagen';
+        } else {
+          pluralSingular[0].textContent = 'han';
+          pluralSingular[1].textContent = 'imágenes';
+        }
+        document.querySelector('#etiquetaFiltrada').textContent = botonPulsado.textContent;
+        ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
       }
-      else
-        botonPulsadoAnterior.classList.remove('pulsado');
-      botonPulsado.classList.add('pulsado');
-      document.querySelector('#numImagesFiltradas').textContent = numImagesFiltradasNumber;
-      if (numImagesFiltradasNumber === 1) {
-        pluralSingular[0].textContent = 'ha';
-        pluralSingular[1].textContent = 'imagen';
-      } else {
-        pluralSingular[0].textContent = 'han';
-        pluralSingular[1].textContent = 'imágenes';
-      }
-      document.querySelector('#etiquetaFiltrada').textContent = botonPulsado.textContent;
-      ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
     }
 
     /*
       Click sobre cualquier elemento que tengo algún antecesor siendo un div con
       clase flexItem pero no flexItemPrincipal e hijo directo de galeriaFotos
     */
-    if (flexItemPulsado = ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)')) {
-      const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
+    {
+      const flexItemPulsado = ev.target.closest('#galeriaFotos>div.flexItem:not(.flexItemPrincipal)');
+      if (flexItemPulsado) {
+        const flexItemPrincipal = document.querySelector('#galeriaFotos>.flexItemPrincipal');
 
-      flexItemPrincipal.classList.remove('flexItemPrincipal');
-      flexItemPrincipal.classList.add('flexItemSecundario');
-      flexItemPulsado.classList.add('flexItemPrincipal');
-      flexItemPulsado.classList.remove('flexItemSecundario');
-      flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
+        flexItemPrincipal.classList.remove('flexItemPrincipal');
+        flexItemPrincipal.classList.add('flexItemSecundario');
+        flexItemPulsado.classList.add('flexItemPrincipal');
+        flexItemPulsado.classList.remove('flexItemSecundario');
+        flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   });
 
