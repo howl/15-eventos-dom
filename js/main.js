@@ -29,6 +29,7 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 
   tags.forEach((tag) => {
     const nuevoButton = fragmento.appendChild(document.createElement('button'));
+    nuevoButton.classList.add('tag');
     nuevoButton.classList.add('cajaTransparente');
     nuevoButton.appendChild(document.createTextNode(tag));
   });
