@@ -16,7 +16,7 @@ const generarTagsDesdeViajes = (viajes, primerTag) => {
   viajes.forEach((viaje) => viaje.tags.forEach((tag) => tags.add(tag)));
 
   /* Colo el tag en primerTag el primero y el resto ordenados de forma normal */
-  return Array.from(tags).sort((a, b) => a === primerTag ? false : b === primerTag ? true : a > b);
+  return Array.from(tags).sort((a, b) => a === primerTag ? -1 : b === primerTag ? 1 : a > b);
 };
 
 /**
