@@ -43,11 +43,11 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
  * @returns
  */
 const generarViajeElemento = (viaje, esPrincipal = false) => {
-  const viajeElemento = document.createElement('div');
+  const viajeElemento = document.createElement('article');
   const contenedorInterior = document.createElement('div');
   const viajeFigure = document.createElement('figure');
   const viajeImagen = document.createElement('img');
-  const viajeCaption = document.createElement('figcaption');
+  const viajeCaption = document.createElement(esPrincipal ? 'h3' : 'h4');
   const viajeCaptionLabel = document.createElement('span');
   const viajeDescripcionExtendida = document.createElement('p');
   const viajeDescripcionExtendidaLabel = document.createElement('span');
@@ -61,7 +61,7 @@ const generarViajeElemento = (viaje, esPrincipal = false) => {
   viajeFigure.appendChild(viajeCaption);
   viajeCaption.appendChild(viajeCaptionLabel);
   viajeCaptionLabel.classList.add('negrita');
-  viajeCaptionLabel.appendChild(document.createTextNode('Título'));
+  viajeCaptionLabel.appendChild(document.createTextNode('Viaje'));
   viajeCaption.appendChild(document.createTextNode(`: ${viaje.pais}`));
   contenedorInterior.appendChild(viajeDescripcionExtendida);
   viajeDescripcionExtendida.classList.add('cursiva');
@@ -221,12 +221,27 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
       if (viajePulsado) {
         const viajePrincipal = document.querySelector('#viajePrincipal>.flexItemPrincipal');
         const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
-        const lugarViajePulsado = viajePulsado.nextElementSibling;
+        const posicionViajePulsado = viajePulsado.nextElementSibling;
+        const tituloViajePrincipal = viajePrincipal.querySelector('h3');
+        const nuevoTituloViajePrincipal = document.createElement('h4');
+        const tituloViajePulsado = viajePulsado.querySelector('h4');
+        const nuevoTituloViajePulsado = document.createElement('h3');
 
+        /* Cambio el h4 del viaje pulsado a h3 y su clase de flexItemSecundario a flexItemPrincipal */
+        nuevoTituloViajePulsado.innerHTML = tituloViajePulsado.innerHTML;
+        tituloViajePulsado.replaceWith(nuevoTituloViajePulsado);
         viajePulsado.classList.replace('flexItemSecundario', 'flexItemPrincipal');
+
+        /* Cambio el h3 del viaje principal a h4 y su clase de flexItemPrincipal a flexItemSecundario */
+        nuevoTituloViajePrincipal.innerHTML = tituloViajePrincipal.innerHTML;
+        tituloViajePrincipal.replaceWith(nuevoTituloViajePrincipal);
         viajePrincipal.classList.replace('flexItemPrincipal', 'flexItemSecundario');
+
+        /* Intercambio el viaje pulsado con el principal */
         viajePrincipal.replaceWith(viajePulsado);
-        galeriaViajesRelacionados.insertBefore(viajePrincipal, lugarViajePulsado);
+        galeriaViajesRelacionados.insertBefore(viajePrincipal, posicionViajePulsado);
+
+        /* Situo la vista sobre el viajePulsado que ahora es el viaje principal */
         viajePulsado.scrollIntoView({ behavior: 'smooth' });
       }
     }
