@@ -164,7 +164,7 @@ const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
 
     /* Click sobre cualquier tag no pulsado actualmente */
     {
-      const botonPulsado = ev.target.closest('#botonesFiltrado>button:not(.pulsado)');
+      const botonPulsado = ev.target.closest('#botonesFiltrado>.tag:not(.pulsado)');
       if (botonPulsado) {
         const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
         const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
@@ -194,11 +194,11 @@ const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
     }
 
     /*
-      Click sobre cualquier elemento que tengo algún antecesor siendo un div con
-      clase flexItem pero no flexItemPrincipal e hijo directo de galeriaViajes
+      Click sobre cualquier elemento que sea de la clase flexItemSecundario
+      dentro de galeriaViajes
     */
     {
-      const flexItemPulsado = ev.target.closest('#galeriaViajes>div.flexItem:not(.flexItemPrincipal)');
+      const flexItemPulsado = ev.target.closest('#galeriaViajes>.flexItemSecundario');
       if (flexItemPulsado) {
         const flexItemPrincipal = document.querySelector('#galeriaViajes>.flexItemPrincipal');
 
