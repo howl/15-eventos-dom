@@ -2,6 +2,7 @@
  * Genera un array con los tags únicos presentes en una serie de viajes con
  * tags.
  * @param {[]} viajes - Array de viajes de los que leer sus tags.
+ * @param {String} [primerTag] - Tag a colocar el primero, es opcional, si se pasa un tag que no existe se ignora.
  * @returns {[]} - El array con los tags únicos.
  */
 const generarTagsDesdeViajes = (viajes, primerTag) => {
@@ -39,7 +40,7 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 /**
  * Genera un elemento de galería que corresponde a un viaje.
  * @param {String} viaje - El objeto viaje a mostrar
- * @param {Boolean} esPrincipal - Determina si el elemento generado se considera principal a efectos de estilo (clase flexItemPrincipal o flexItemSecundario)
+ * @param {Boolean} [esPrincipal] - Determina si el elemento generado se considera principal a efectos de estilo (clase flexItemPrincipal o flexItemSecundario)
  * @returns
  */
 const generarViajeElemento = (viaje, esPrincipal = false) => {
