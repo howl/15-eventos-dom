@@ -198,16 +198,18 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
 
         const tag = botonPulsado.textContent;
         const numViajesFiltrados = mostrarViajesConTag(viajes, tag, document.querySelector('#viajePrincipal'), document.querySelector('#galeriaViajesRelacionados'))
-        const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
 
         botonPulsado.classList.add('pulsado');
 
         actualizarInfoDeFiltrado(numViajesFiltrados, tag, document.querySelector('#infoDeFiltrado'));
 
-        if (numViajesFiltrados > 1)
-          tituloViajesRelacionados.classList.remove('displayNone');
-        else
-          tituloViajesRelacionados.classList.add('displayNone');
+        {
+          const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
+          if (numViajesFiltrados > 1)
+            tituloViajesRelacionados.classList.remove('displayNone');
+          else
+            tituloViajesRelacionados.classList.add('displayNone');
+        }
 
         ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
       }
