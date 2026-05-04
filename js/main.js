@@ -12,12 +12,15 @@ const generarTagsDesdeViajes = (viajes, primerTag) => {
     existe, elijo usar el objeto Set propio de javascript. Es mucho más rapido
     haciendo lo suyo.
   */
-  const tags = new Set();
+  // const tags = new Set();
 
-  viajes.forEach((viaje) => viaje.tags.forEach((tag) => tags.add(tag)));
+  // viajes.forEach((viaje) => viaje.tags.forEach((tag) => tags.add(tag)));
 
-  /* Colo el tag en primerTag el primero y el resto ordenados de forma normal */
-  return Array.from(tags).sort((a, b) => a === primerTag ? -1 : b === primerTag ? 1 : a > b);
+  // /* Colo el tag en primerTag el primero y el resto ordenados de forma normal */
+  // return Array.from(tags).sort((a, b) => a === primerTag ? -1 : b === primerTag ? 1 : a > b);
+
+  /* Todo el código anterior en una sola línea. */
+  return [...new Set(viajes.flatMap(({ tags }) => tags))].sort((a, b) => a === primerTag ? -1 : b === primerTag ? 1 : a > b);
 };
 
 /**
@@ -196,13 +199,17 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
             botonPulsadoAnterior.classList.remove('pulsado');
         }
 
+        /* Recupero el string del tag pulsado y muestro los viajes con ese tag obteniendo la cantidad de ellos */
         const tag = botonPulsado.textContent;
         const numViajesFiltrados = mostrarViajesConTag(viajes, tag, document.querySelector('#viajePrincipal'), document.querySelector('#galeriaViajesRelacionados'))
 
+        /* Marco el tag como pulsado */
         botonPulsado.classList.add('pulsado');
 
+        /* Actualizo la información del filtrado hecho por el tag */
         actualizarInfoDeFiltrado(numViajesFiltrados, tag, document.querySelector('#infoDeFiltrado'));
 
+        /* Si no existen viajes relacionados, es decir no más de 1 viaje, no muestro la cabecera de dichos viajes. */
         {
           const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
           if (numViajesFiltrados > 1)
@@ -211,6 +218,7 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
             tituloViajesRelacionados.classList.add('displayNone');
         }
 
+        /* Coloco en la vista del navegador el elemento main */
         ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
       }
     }
@@ -223,12 +231,12 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
       const viajePulsado = ev.target.closest('#galeriaViajesRelacionados>.flexItem');
       if (viajePulsado) {
         const viajePrincipal = document.querySelector('#viajePrincipal>.flexItemPrincipal');
-        const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
-        const posicionViajePulsado = viajePulsado.nextElementSibling;
         const tituloViajePrincipal = viajePrincipal.querySelector('h3');
         const nuevoTituloViajePrincipal = document.createElement('h4');
+        const posicionViajePulsado = viajePulsado.nextElementSibling;
         const tituloViajePulsado = viajePulsado.querySelector('h4');
         const nuevoTituloViajePulsado = document.createElement('h3');
+        const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
 
         /* Cambio el h4 del viaje pulsado a h3 y su clase de flexItemSecundario a flexItemPrincipal */
         nuevoTituloViajePulsado.innerHTML = tituloViajePulsado.innerHTML;
@@ -250,5 +258,6 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
     }
   });
 
+  /* Muestro los botones para pulsar que corresponden con los tag únicos */
   generarBotonesDesdeTags(generarTagsDesdeViajes(viajes, 'todas'), botonesFiltrado);
 })();
