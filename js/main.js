@@ -213,21 +213,23 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
     }
 
     /*
-      Click sobre cualquier elemento que sea de la clase flexItemSecundario
-      dentro de galeriaViajes
+      Click sobre cualquier elemento que sea de la clase flexItem dentro de
+      galeriaViajesRelacionado
     */
-    // {
-    //   const flexItemPulsado = ev.target.closest('#galeriaViajes>.flexItemSecundario');
-    //   if (flexItemPulsado) {
-    //     const flexItemPrincipal = document.querySelector('#galeriaViajes>.flexItemPrincipal');
+    {
+      const viajePulsado = ev.target.closest('#galeriaViajesRelacionados>.flexItem');
+      if (viajePulsado) {
+        const viajePrincipal = document.querySelector('#viajePrincipal>.flexItemPrincipal');
+        const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
+        const lugarViajePulsado = viajePulsado.nextElementSibling;
 
-    //     flexItemPrincipal.classList.remove('flexItemPrincipal');
-    //     flexItemPrincipal.classList.add('flexItemSecundario');
-    //     flexItemPulsado.classList.add('flexItemPrincipal');
-    //     flexItemPulsado.classList.remove('flexItemSecundario');
-    //     flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
-    //   }
-    // }
+        viajePulsado.classList.replace('flexItemSecundario', 'flexItemPrincipal');
+        viajePrincipal.classList.replace('flexItemPrincipal', 'flexItemSecundario');
+        viajePrincipal.replaceWith(viajePulsado);
+        galeriaViajesRelacionados.insertBefore(viajePrincipal, lugarViajePulsado);
+        viajePulsado.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   });
 
   generarBotonesDesdeTags(generarTagsDesdeViajes(viajes, 'todas'), botonesFiltrado);
