@@ -37,6 +37,45 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 };
 
 /**
+ * Genera un elemento de galería que corresponde a un viaje.
+ * @param {string} viaje - El objeto viaje a mostrar
+ * @param {boolean} esPrincipal - True si es viaje principal, false en caso contrario.
+ * @returns
+ */
+const generarViajeElemento = (viaje, esPrincipal) => {
+  const viajeElemento = document.createElement('div');
+  const contenedorInterior = document.createElement('div');
+  const viajeFigure = document.createElement('figure');
+  const viajeImagen = document.createElement('img');
+  const viajeCaption = document.createElement('figcaption');
+  const viajeCaptionLabel = document.createElement('span');
+  const viajeDescripcionExtendida = document.createElement('p');
+  const viajeDescripcionExtendidaLabel = document.createElement('span');
+
+  viajeElemento.classList.add('cajaTransparente');
+  viajeElemento.classList.add('flexItem', esPrincipal ? 'flexItemPrincipal' : 'flexItemSecundario');
+  viajeElemento.appendChild(contenedorInterior);
+  contenedorInterior.appendChild(viajeFigure);
+  viajeFigure.appendChild(viajeImagen);
+  viajeImagen.src = viaje.imgSrc;
+  viajeImagen.alt = viaje.pais;
+  viajeFigure.appendChild(viajeCaption);
+  viajeCaption.appendChild(viajeCaptionLabel);
+  viajeCaptionLabel.classList.add('negrita');
+  viajeCaptionLabel.appendChild(document.createTextNode('Título'));
+  viajeCaption.appendChild(document.createTextNode(`: ${viaje.pais}`));
+  contenedorInterior.appendChild(viajeDescripcionExtendida);
+  viajeDescripcionExtendida.classList.add('cursiva');
+  viajeDescripcionExtendida.appendChild(viajeDescripcionExtendidaLabel);
+  viajeDescripcionExtendidaLabel.classList.add('cursiva');
+  viajeDescripcionExtendidaLabel.classList.add('negrita');
+  viajeDescripcionExtendidaLabel.appendChild(document.createTextNode('Descripción'));
+  viajeDescripcionExtendida.appendChild(document.createTextNode(`: ${viaje.descripcion}`));
+
+  return viajeElemento;
+};
+
+/**
  * Filtra los viajes por el tag añdiéndolos al elementoPadre devolviendo la
  * cantidad de viajes filtrados.
  * @param {[]} viajes - Array con los viajes a filtrar.
@@ -64,38 +103,8 @@ const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
     viajesRelacionadosTitulo.textContent = 'Viajes relacionados';
     fragmento.appendChild(viajesRelacionadosTitulo);
   }
-  viajesFiltrados.forEach((viaje, index) => {
-    const viajeElemento = document.createElement('div');
-    const contenedorInterior = document.createElement('div');
-    const viajeFigure = document.createElement('figure');
-    const viajeImagen = document.createElement('img');
-    const viajeCaption = document.createElement('figcaption');
-    const viajeCaptionLabel = document.createElement('span');
-    const viajeDescripcionExtendida = document.createElement('p');
-    const viajeDescripcionExtendidaLabel = document.createElement('span');
 
-    viajeElemento.classList.add('cajaTransparente');
-    viajeElemento.classList.add('flexItem', !index ? 'flexItemPrincipal' : 'flexItemSecundario');
-    viajeElemento.appendChild(contenedorInterior);
-    contenedorInterior.appendChild(viajeFigure);
-    viajeFigure.appendChild(viajeImagen);
-    viajeImagen.src = viaje.imgSrc;
-    viajeImagen.alt = viaje.pais;
-    viajeFigure.appendChild(viajeCaption);
-    viajeCaption.appendChild(viajeCaptionLabel);
-    viajeCaptionLabel.classList.add('negrita');
-    viajeCaptionLabel.appendChild(document.createTextNode('Título'));
-    viajeCaption.appendChild(document.createTextNode(`: ${viaje.pais}`));
-    contenedorInterior.appendChild(viajeDescripcionExtendida);
-    viajeDescripcionExtendida.classList.add('cursiva');
-    viajeDescripcionExtendida.appendChild(viajeDescripcionExtendidaLabel);
-    viajeDescripcionExtendidaLabel.classList.add('cursiva');
-    viajeDescripcionExtendidaLabel.classList.add('negrita');
-    viajeDescripcionExtendidaLabel.appendChild(document.createTextNode('Descripción'));
-    viajeDescripcionExtendida.appendChild(document.createTextNode(`: ${viaje.descripcion}`));
-
-    fragmento.appendChild(viajeElemento);
-  });
+  viajesFiltrados.forEach((viaje, index) => fragmento.appendChild(generarViajeElemento(viaje, index === 0)));
 
   elementoPadre.appendChild(fragmento);
 
