@@ -48,6 +48,12 @@ img {
   width: 100%
 }
 
+#cabeceraPrincipal>p {
+  font-size: 3rem;
+  text-align: center;
+  margin: 1.5dvh;
+}
+
 .displayNone {
   display: none;
 }
@@ -143,12 +149,6 @@ img {
 .flexItemSecundario:hover>div>p {
   opacity: 1;
   transform: translateY(0);
-}
-
-#cabeceraPrincipal>p {
-  font-size: 3rem;
-  text-align: center;
-  margin: 1.5dvh;
 }
 
 .tags>button {
