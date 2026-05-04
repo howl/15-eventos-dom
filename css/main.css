@@ -110,8 +110,10 @@ img {
 }
 
 .flexItemPrincipal {
-  order: -1;
-  /* Esta propiedad permite que al hacer scroll a un elemento no quede ajustado a la parte superior de la ventana sino que le de un margen. */
+  /*
+    Esta propiedad permite que al hacer scroll a un elemento no quede ajustado
+    a la parte superior de la ventana sino que le de un margen.
+  */
   scroll-margin-top: 2dvw;
 }
 
@@ -121,7 +123,6 @@ img {
 
 .flexItemSecundario,
 .tag {
-  order: 1;
   transition: transform 0.3s ease;
 }
 
@@ -181,7 +182,7 @@ img {
 /* Dispositivos móviles medianos */
 @media screen and (min-width: 576px) {
   .flexItemPrincipal {
-    margin: 0 15dvw;
+    flex-basis: 75%;
   }
 
   .flexItemSecundario {
@@ -197,7 +198,7 @@ img {
 /* Tablets */
 @media screen and (min-width: 768px) {
   .flexItemPrincipal {
-    margin: 0 20dvw;
+    flex-basis: 66%;
   }
 
   .flexItemSecundario {
@@ -209,7 +210,7 @@ img {
 /* Pantallas de escritorio pequeñas */
 @media screen and (min-width: 992px) {
   .flexItemPrincipal {
-    margin: 0 25dvw;
+    flex-basis: 50%;
   }
 
   .flexItemSecundario {

@@ -29,8 +29,7 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 
   tags.forEach((tag) => {
     const nuevoButton = fragmento.appendChild(document.createElement('button'));
-    nuevoButton.classList.add('tag');
-    nuevoButton.classList.add('cajaTransparente');
+    nuevoButton.classList.add('tag', 'cajaTransparente');
     nuevoButton.appendChild(document.createTextNode(tag));
   });
 
@@ -39,11 +38,11 @@ const generarBotonesDesdeTags = (tags, elementoPadre) => {
 
 /**
  * Genera un elemento de galería que corresponde a un viaje.
- * @param {string} viaje - El objeto viaje a mostrar
- * @param {boolean} esPrincipal - True si es viaje principal, false en caso contrario.
+ * @param {String} viaje - El objeto viaje a mostrar
+ * @param {Boolean} esPrincipal - Determina si el elemento generado se considera principal a efectos de estilo (clase flexItemPrincipal o flexItemSecundario)
  * @returns
  */
-const generarViajeElemento = (viaje, esPrincipal) => {
+const generarViajeElemento = (viaje, esPrincipal = false) => {
   const viajeElemento = document.createElement('div');
   const contenedorInterior = document.createElement('div');
   const viajeFigure = document.createElement('figure');
@@ -53,8 +52,7 @@ const generarViajeElemento = (viaje, esPrincipal) => {
   const viajeDescripcionExtendida = document.createElement('p');
   const viajeDescripcionExtendidaLabel = document.createElement('span');
 
-  viajeElemento.classList.add('cajaTransparente');
-  viajeElemento.classList.add('flexItem', esPrincipal ? 'flexItemPrincipal' : 'flexItemSecundario');
+  viajeElemento.classList.add('cajaTransparente', 'flexItem', esPrincipal ? 'flexItemPrincipal' : 'flexItemSecundario');
   viajeElemento.appendChild(contenedorInterior);
   contenedorInterior.appendChild(viajeFigure);
   viajeFigure.appendChild(viajeImagen);
@@ -68,8 +66,7 @@ const generarViajeElemento = (viaje, esPrincipal) => {
   contenedorInterior.appendChild(viajeDescripcionExtendida);
   viajeDescripcionExtendida.classList.add('cursiva');
   viajeDescripcionExtendida.appendChild(viajeDescripcionExtendidaLabel);
-  viajeDescripcionExtendidaLabel.classList.add('cursiva');
-  viajeDescripcionExtendidaLabel.classList.add('negrita');
+  viajeDescripcionExtendidaLabel.classList.add('cursiva', 'negrita');
   viajeDescripcionExtendidaLabel.appendChild(document.createTextNode('Descripción'));
   viajeDescripcionExtendida.appendChild(document.createTextNode(`: ${viaje.descripcion}`));
 
@@ -77,39 +74,65 @@ const generarViajeElemento = (viaje, esPrincipal) => {
 };
 
 /**
- * Filtra los viajes por el tag añdiéndolos al elementoPadre devolviendo la
+ * Filtra los viajes por el tag añdiéndolos a los elementoPadres devolviendo la
  * cantidad de viajes filtrados.
  * @param {[]} viajes - Array con los viajes a filtrar.
- * @param {string} tag - Tag por el que filtrar los viajes.
- * @param {Element} elementoPadre - Elemento al que colocar los viajes.
- * @returns {number} - Cantidad de viajes filtrados.
+ * @param {String} tag - Tag por el que filtrar los viajes.
+ * @param {Element} elementoPadrePrincipal - Elemento al que colocar el viaje principal.
+ * @param {Element} elementoPadreSecundario - Elemento al que colocar los viajes secundarios.
+ * @returns {Number} - Cantidad de viajes filtrados.
  */
-const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
+const mostrarViajesConTag = (viajes, tag, elementoPadrePrincipal, elementoPadreSecundario) => {
   const fragmento = document.createDocumentFragment();
   const viajesFiltrados = viajes.filter(viaje => viaje.tags.includes(tag));
-
-  elementoPadre.textContent = '';
+  const numViajesFiltrados = viajesFiltrados.length;
   /*
-    Es importante colocar el primero en la estructura HTML el título de la
-    sección secundaria, ya que sino el efecto de scroll suave para el viaje que
-    es principal por defecto al pasarlo a secundaria y retornarlo a principal
-    hace un desplazamiento brusco a la parte superior de la página y luego baja
-    suave.
-    Así lo hace desde abajo sin movimiento brusco inicial como las demás.
+    Para no favorecer a ninguno de los viajes elijo aleatoriamente el que se
+    mostrará como principal
   */
-  if (viajesFiltrados.length > 1) {
-    const viajesRelacionadosTitulo = document.createElement('h3');
+  const indiceViajeAleatorio = Math.floor(Math.random() * numViajesFiltrados);
 
-    viajesRelacionadosTitulo.classList.add('flexItem');
-    viajesRelacionadosTitulo.textContent = 'Viajes relacionados';
-    fragmento.appendChild(viajesRelacionadosTitulo);
+  elementoPadrePrincipal.replaceChildren(generarViajeElemento(viajesFiltrados[indiceViajeAleatorio], true));
+
+  viajesFiltrados.filter((viaje, index) => index != indiceViajeAleatorio).forEach((viaje) => fragmento.appendChild(generarViajeElemento(viaje)));
+  elementoPadreSecundario.replaceChildren(fragmento);
+
+  return numViajesFiltrados;
+};
+
+/**
+ * Actualiza la información de filtrado sobre el elemento infoDeFiltrado.
+ * @param {Number} numViajesFiltrados - Cantidad de viajes filtrados.
+ * @param {String} tag - Etiqueta por la que se ha filtrado.
+ * @param {Element} infoDeFiltrado - Elemento al que se aplicará la actiualización.
+ */
+const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
+  const fragmento = document.createDocumentFragment();
+  const tagEnNegrita = document.createElement('span');
+
+  tagEnNegrita.classList.add('negrita');
+  tagEnNegrita.appendChild(document.createTextNode(tag));
+
+  if (!numViajesFiltrados) {
+    fragmento.appendChild(document.createTextNode('No se han encontrado viajes con el tag '));
+    fragmento.appendChild(tagEnNegrita);
+  } else {
+    const cantidadEnNegrita = document.createElement('span');
+    const pluralSingular = ['', ''];
+
+    cantidadEnNegrita.classList.add('negrita');
+    cantidadEnNegrita.appendChild(document.createTextNode(numViajesFiltrados));
+
+    if (numViajesFiltrados > 1)
+      [pluralSingular[0], pluralSingular[1]] = ['n', 's'];
+
+    fragmento.appendChild(document.createTextNode(`Se ha${pluralSingular[0]} encontrado `));
+    fragmento.appendChild(cantidadEnNegrita);
+    fragmento.appendChild(document.createTextNode(` viaje${pluralSingular[1]} con el tag `));
+    fragmento.appendChild(tagEnNegrita);
   }
 
-  viajesFiltrados.forEach((viaje, index) => fragmento.appendChild(generarViajeElemento(viaje, index === 0)));
-
-  elementoPadre.appendChild(fragmento);
-
-  return viajesFiltrados.length;
+  infoDeFiltrado.replaceChildren(fragmento);
 };
 
 /**
@@ -166,29 +189,25 @@ const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
     {
       const botonPulsado = ev.target.closest('#botonesFiltrado>.tag:not(.pulsado)');
       if (botonPulsado) {
-        const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>button.pulsado');
-        const pluralSingular = document.querySelectorAll('#infoDeFiltrado>.pluralSingular');
-        const numViajesFiltradosNumber = mostrarViajesConTag(viajes, botonPulsado.textContent, document.querySelector('#galeriaViajes'))
-
-        if (!botonPulsadoAnterior) {
-          const infoDeUso = document.querySelector('#infoDeUso');
-          const infoDeFiltrado = document.querySelector('#infoDeFiltrado');
-
-          infoDeUso.classList.toggle('displayNone');
-          infoDeFiltrado.classList.toggle('displayNone');
+        {
+          const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>.tag.pulsado');
+          if (botonPulsadoAnterior)
+            botonPulsadoAnterior.classList.remove('pulsado');
         }
-        else
-          botonPulsadoAnterior.classList.remove('pulsado');
+
+        const tag = botonPulsado.textContent;
+        const numViajesFiltrados = mostrarViajesConTag(viajes, tag, document.querySelector('#viajePrincipal'), document.querySelector('#galeriaViajesRelacionados'))
+        const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
+
         botonPulsado.classList.add('pulsado');
-        document.querySelector('#numViajesFiltrados').textContent = numViajesFiltradosNumber;
-        if (numViajesFiltradosNumber === 1) {
-          pluralSingular[0].textContent = 'ha';
-          pluralSingular[1].textContent = 'viaje';
-        } else {
-          pluralSingular[0].textContent = 'han';
-          pluralSingular[1].textContent = 'viajes';
-        }
-        document.querySelector('#etiquetaFiltrada').textContent = botonPulsado.textContent;
+
+        actualizarInfoDeFiltrado(numViajesFiltrados, tag, document.querySelector('#infoDeFiltrado'));
+
+        if (numViajesFiltrados > 1)
+          tituloViajesRelacionados.classList.remove('displayNone');
+        else
+          tituloViajesRelacionados.classList.add('displayNone');
+
         ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
       }
     }
@@ -197,18 +216,18 @@ const mostrarViajesConTag = (viajes, tag, elementoPadre) => {
       Click sobre cualquier elemento que sea de la clase flexItemSecundario
       dentro de galeriaViajes
     */
-    {
-      const flexItemPulsado = ev.target.closest('#galeriaViajes>.flexItemSecundario');
-      if (flexItemPulsado) {
-        const flexItemPrincipal = document.querySelector('#galeriaViajes>.flexItemPrincipal');
+    // {
+    //   const flexItemPulsado = ev.target.closest('#galeriaViajes>.flexItemSecundario');
+    //   if (flexItemPulsado) {
+    //     const flexItemPrincipal = document.querySelector('#galeriaViajes>.flexItemPrincipal');
 
-        flexItemPrincipal.classList.remove('flexItemPrincipal');
-        flexItemPrincipal.classList.add('flexItemSecundario');
-        flexItemPulsado.classList.add('flexItemPrincipal');
-        flexItemPulsado.classList.remove('flexItemSecundario');
-        flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    //     flexItemPrincipal.classList.remove('flexItemPrincipal');
+    //     flexItemPrincipal.classList.add('flexItemSecundario');
+    //     flexItemPulsado.classList.add('flexItemPrincipal');
+    //     flexItemPulsado.classList.remove('flexItemSecundario');
+    //     flexItemPulsado.scrollIntoView({ behavior: 'smooth' });
+    //   }
+    // }
   });
 
   generarBotonesDesdeTags(generarTagsDesdeViajes(viajes, 'todas'), botonesFiltrado);
