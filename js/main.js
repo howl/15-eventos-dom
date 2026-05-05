@@ -1,4 +1,129 @@
 /**
+ * Función de ejecución principal.
+ */
+(() => {
+  const viajes = [
+    {
+      imgSrc: 'assets/images/viajes/viajes-1.jpg',
+      pais: 'Cuba',
+      descripcion: 'En Varadero encontrarás las mejores playas cristalinas.',
+      tags: ['todas', 'playa', 'tropical', 'costa', 'sol', 'calor'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-2.jpg',
+      pais: 'Maldivas',
+      descripcion: 'Disfruta de los mejores atolones del mundo.',
+      tags: ['todas', 'playa', 'tropical', 'costa', 'atolón', 'sol', 'calor'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-3.jpg',
+      pais: 'Múltiples destinos',
+      descripcion: 'Si no te decides que país quieres visitar hay disponibles viajes por varios de ellos a la vez.',
+      tags: ['todas', 'letreros'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-4.jpg',
+      pais: 'España',
+      descripcion: 'Sevilla tiene un color especial.',
+      tags: ['todas', 'ciudad', 'sol', 'calor', 'histórico'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-5.jpg',
+      pais: 'España',
+      descripcion: 'La misma plaza desde otro lado, o quizás es Naboo.',
+      tags: ['todas', 'ciudad', 'sol', 'calor', 'histórico'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-6.jpg',
+      pais: 'España',
+      descripcion: 'Paseo del Arañón.',
+      tags: ['todas', 'costa', 'frio'],
+    }, {
+      imgSrc: 'assets/images/viajes/viajes-7.jpg',
+      pais: 'España',
+      descripcion: 'Castillo de la Yedra.',
+      tags: ['todas', 'histórico', 'sol', 'calor'],
+    },
+  ];
+  const botonesFiltrado = document.querySelector('#botonesFiltrado');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    /* Muestro los botones para pulsar que corresponden con los tag únicos */
+    generarBotonesDesdeTags(generarTagsDesdeViajes(viajes, 'todas'), botonesFiltrado);
+  });
+
+  document.addEventListener('click', ev => {
+    /*
+      Como uso un único listener general, no secciono cada parte en funciones
+      distintas ya que no va a existir reuso de código
+    */
+
+    /* Click sobre cualquier tag no pulsado actualmente */
+    {
+      const botonPulsado = ev.target.closest('#botonesFiltrado>.tag:not(.pulsado)');
+      if (botonPulsado) {
+        {
+          const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>.tag.pulsado');
+          if (botonPulsadoAnterior)
+            botonPulsadoAnterior.classList.remove('pulsado');
+        }
+
+        /* Recupero el string del tag pulsado y muestro los viajes con ese tag obteniendo la cantidad de ellos */
+        const tag = botonPulsado.textContent;
+        const numViajesFiltrados = mostrarViajesConTag(viajes, tag, document.querySelector('#viajePrincipal'), document.querySelector('#galeriaViajesRelacionados'))
+
+        /* Marco el tag como pulsado */
+        botonPulsado.classList.add('pulsado');
+
+        /* Actualizo la información del filtrado hecho por el tag */
+        actualizarInfoDeFiltrado(numViajesFiltrados, tag, document.querySelector('#infoDeFiltrado'));
+
+        /* Si no existen viajes relacionados, es decir no más de 1 viaje, no muestro la cabecera de dichos viajes. */
+        {
+          const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
+          if (numViajesFiltrados > 1)
+            tituloViajesRelacionados.classList.remove('displayNone');
+          else
+            tituloViajesRelacionados.classList.add('displayNone');
+        }
+
+        /* Coloco en la vista del navegador el elemento main */
+        ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /*
+      Click sobre cualquier elemento que sea de la clase flexItem dentro de
+      galeriaViajesRelacionado
+    */
+    {
+      const viajePulsado = ev.target.closest('#galeriaViajesRelacionados>.flexItem');
+      if (viajePulsado) {
+        const viajePrincipal = document.querySelector('#viajePrincipal>.flexItemPrincipal');
+        const tituloViajePrincipal = viajePrincipal.querySelector('h3');
+        const nuevoTituloViajePrincipal = document.createElement('h4');
+        const posicionViajePulsado = viajePulsado.nextElementSibling;
+        const tituloViajePulsado = viajePulsado.querySelector('h4');
+        const nuevoTituloViajePulsado = document.createElement('h3');
+        const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
+
+        /* Cambio el h4 del viaje pulsado a h3 y su clase de flexItemSecundario a flexItemPrincipal */
+        nuevoTituloViajePulsado.innerHTML = tituloViajePulsado.innerHTML;
+        tituloViajePulsado.replaceWith(nuevoTituloViajePulsado);
+        viajePulsado.classList.replace('flexItemSecundario', 'flexItemPrincipal');
+
+        /* Cambio el h3 del viaje principal a h4 y su clase de flexItemPrincipal a flexItemSecundario */
+        nuevoTituloViajePrincipal.innerHTML = tituloViajePrincipal.innerHTML;
+        tituloViajePrincipal.replaceWith(nuevoTituloViajePrincipal);
+        viajePrincipal.classList.replace('flexItemPrincipal', 'flexItemSecundario');
+
+        /* Intercambio el viaje pulsado con el principal */
+        viajePrincipal.replaceWith(viajePulsado);
+        galeriaViajesRelacionados.insertBefore(viajePrincipal, posicionViajePulsado);
+
+        /* Situo la vista sobre el viajePulsado que ahora es el viaje principal */
+        viajePulsado.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+})();
+
+/**
  * Genera un array con los tags únicos presentes en una serie de viajes con
  * tags.
  * @param {[]} viajes - Array de viajes de los que leer sus tags.
@@ -138,126 +263,3 @@ const actualizarInfoDeFiltrado = (numViajesFiltrados, tag, infoDeFiltrado) => {
 
   infoDeFiltrado.replaceChildren(fragmento);
 };
-
-/**
- * Función de ejecución principal.
- */
-(() => {
-  const viajes = [
-    {
-      imgSrc: 'assets/images/viajes/viajes-1.jpg',
-      pais: 'Cuba',
-      descripcion: 'En Varadero encontrarás las mejores playas cristalinas.',
-      tags: ['todas', 'playa', 'tropical', 'costa', 'sol', 'calor'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-2.jpg',
-      pais: 'Maldivas',
-      descripcion: 'Disfruta de los mejores atolones del mundo.',
-      tags: ['todas', 'playa', 'tropical', 'costa', 'atolón', 'sol', 'calor'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-3.jpg',
-      pais: 'Múltiples destinos',
-      descripcion: 'Si no te decides que país quieres visitar hay disponibles viajes por varios de ellos a la vez.',
-      tags: ['todas', 'letreros'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-4.jpg',
-      pais: 'España',
-      descripcion: 'Sevilla tiene un color especial.',
-      tags: ['todas', 'ciudad', 'sol', 'calor', 'histórico'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-5.jpg',
-      pais: 'España',
-      descripcion: 'La misma plaza desde otro lado, o quizás es Naboo.',
-      tags: ['todas', 'ciudad', 'sol', 'calor', 'histórico'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-6.jpg',
-      pais: 'España',
-      descripcion: 'Paseo del Arañón.',
-      tags: ['todas', 'costa', 'frio'],
-    }, {
-      imgSrc: 'assets/images/viajes/viajes-7.jpg',
-      pais: 'España',
-      descripcion: 'Castillo de la Yedra.',
-      tags: ['todas', 'histórico', 'sol', 'calor'],
-    },
-  ];
-  const botonesFiltrado = document.querySelector('#botonesFiltrado');
-
-  document.addEventListener('click', ev => {
-    /*
-      Como uso un único listener general, no secciono cada parte en funciones
-      distintas ya que no va a existir reuso de código
-    */
-
-    /* Click sobre cualquier tag no pulsado actualmente */
-    {
-      const botonPulsado = ev.target.closest('#botonesFiltrado>.tag:not(.pulsado)');
-      if (botonPulsado) {
-        {
-          const botonPulsadoAnterior = document.querySelector('#botonesFiltrado>.tag.pulsado');
-          if (botonPulsadoAnterior)
-            botonPulsadoAnterior.classList.remove('pulsado');
-        }
-
-        /* Recupero el string del tag pulsado y muestro los viajes con ese tag obteniendo la cantidad de ellos */
-        const tag = botonPulsado.textContent;
-        const numViajesFiltrados = mostrarViajesConTag(viajes, tag, document.querySelector('#viajePrincipal'), document.querySelector('#galeriaViajesRelacionados'))
-
-        /* Marco el tag como pulsado */
-        botonPulsado.classList.add('pulsado');
-
-        /* Actualizo la información del filtrado hecho por el tag */
-        actualizarInfoDeFiltrado(numViajesFiltrados, tag, document.querySelector('#infoDeFiltrado'));
-
-        /* Si no existen viajes relacionados, es decir no más de 1 viaje, no muestro la cabecera de dichos viajes. */
-        {
-          const tituloViajesRelacionados = document.querySelector('#tituloViajesRelacionados')
-          if (numViajesFiltrados > 1)
-            tituloViajesRelacionados.classList.remove('displayNone');
-          else
-            tituloViajesRelacionados.classList.add('displayNone');
-        }
-
-        /* Coloco en la vista del navegador el elemento main */
-        ev.target.closest('main').scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    /*
-      Click sobre cualquier elemento que sea de la clase flexItem dentro de
-      galeriaViajesRelacionado
-    */
-    {
-      const viajePulsado = ev.target.closest('#galeriaViajesRelacionados>.flexItem');
-      if (viajePulsado) {
-        const viajePrincipal = document.querySelector('#viajePrincipal>.flexItemPrincipal');
-        const tituloViajePrincipal = viajePrincipal.querySelector('h3');
-        const nuevoTituloViajePrincipal = document.createElement('h4');
-        const posicionViajePulsado = viajePulsado.nextElementSibling;
-        const tituloViajePulsado = viajePulsado.querySelector('h4');
-        const nuevoTituloViajePulsado = document.createElement('h3');
-        const galeriaViajesRelacionados = document.querySelector('#galeriaViajesRelacionados');
-
-        /* Cambio el h4 del viaje pulsado a h3 y su clase de flexItemSecundario a flexItemPrincipal */
-        nuevoTituloViajePulsado.innerHTML = tituloViajePulsado.innerHTML;
-        tituloViajePulsado.replaceWith(nuevoTituloViajePulsado);
-        viajePulsado.classList.replace('flexItemSecundario', 'flexItemPrincipal');
-
-        /* Cambio el h3 del viaje principal a h4 y su clase de flexItemPrincipal a flexItemSecundario */
-        nuevoTituloViajePrincipal.innerHTML = tituloViajePrincipal.innerHTML;
-        tituloViajePrincipal.replaceWith(nuevoTituloViajePrincipal);
-        viajePrincipal.classList.replace('flexItemPrincipal', 'flexItemSecundario');
-
-        /* Intercambio el viaje pulsado con el principal */
-        viajePrincipal.replaceWith(viajePulsado);
-        galeriaViajesRelacionados.insertBefore(viajePrincipal, posicionViajePulsado);
-
-        /* Situo la vista sobre el viajePulsado que ahora es el viaje principal */
-        viajePulsado.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  });
-
-  /* Muestro los botones para pulsar que corresponden con los tag únicos */
-  generarBotonesDesdeTags(generarTagsDesdeViajes(viajes, 'todas'), botonesFiltrado);
-})();
